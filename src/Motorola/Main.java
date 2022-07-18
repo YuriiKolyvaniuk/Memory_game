@@ -3,14 +3,9 @@ package Motorola;
 import java.io.*;
 import java.lang.invoke.SwitchPoint;
 import java.nio.Buffer;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-import java.util.Scanner;
+import java.util.*;
 
 public class Main {
-
-    public static int BEST_RESULT = 0;
 
     private static void randElFromList(List<String> list, int number,List<String> main_list){
 

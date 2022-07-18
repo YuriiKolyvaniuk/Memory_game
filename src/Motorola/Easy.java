@@ -1,5 +1,6 @@
 package Motorola;
 
+import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class Easy {
@@ -258,7 +259,7 @@ public class Easy {
 
     }
 
-    Easy(List<String> list){
+    Easy(List<String> list) throws Exception {
 
         List<String> memory_game = new ArrayList<>();
         memory_game.addAll(list);
@@ -270,6 +271,7 @@ public class Easy {
 
         long start = System.currentTimeMillis();
 
+
         while(flag) {
             if( guess_chances > 0 && is_covered()) {
                 gameplay(memory_game);
@@ -277,16 +279,23 @@ public class Easy {
             }else if(guess_chances>=0 && !is_covered()){
                 flag=false;
                 long end = System.currentTimeMillis();
+                double guessing_time = (double)(end - start)/1000;
                 win();
-                System.out.println("You solved the memory game after " +(10-guess_chances) + " chances. It took you " + (double)(end - start)/1000 +
-                        "seconds");
+                System.out.println("You solved the memory game after " +(10-guess_chances) + " chances. It took you " + guessing_time + "seconds");
+
+                Result result = new Result(guessing_time,(10-guess_chances));
+                BestResult bestResult = new BestResult(result.name,result.guessing_date,result.guessing_time,result.guessing_tries,"Easy");
+                System.out.println("Top 10 result: ");
+                bestResult.show();
+
             }else {
                 flag=false;
                 lose();
+                BestResult bestResult= new BestResult();
+                System.out.println("Top 10 result: ");
+                bestResult.show();
             }
         }
-
-        // Main.BEST_RESULT = 1;
 
         System.out.println();
     }
