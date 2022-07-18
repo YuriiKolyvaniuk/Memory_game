@@ -11,7 +11,7 @@ public class Result {
     double guessing_time;
     int guessing_tries;
 
-    Result(double time,int tries){
+    Result(double time, int tries){
         Scanner scanner = new Scanner(System.in);
         System.out.print("Please, enter your name: ");
         this.name = scanner.next();

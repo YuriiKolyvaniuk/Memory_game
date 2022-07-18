@@ -44,7 +44,7 @@ public class Main {
         while (bufferedReader.ready()){
             str_list.add(bufferedReader.readLine());
         }
-
+        ////////////////////Choice of action. Choice of game difficulty.////////////////////
         do{
             System.out.println("Choose your action: \n1)Play memory game. \n2)Exit.");
             Scanner user_input = new Scanner(System.in);

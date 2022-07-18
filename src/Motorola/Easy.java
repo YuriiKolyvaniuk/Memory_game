@@ -1,19 +1,20 @@
 package Motorola;
 
-import java.text.SimpleDateFormat;
 import java.util.*;
 
 public class Easy {
+    ////////////////////Number of chances.////////////////////
     private int guess_chances = 10;
     private List<Boolean> covered = Arrays.asList(true,true,true,true,true,true,true,true);
-
+    ////////////////////Open the word.////////////////////
     private void uncover(int index){
         covered.set(index,false);
     }
+    ////////////////////Close the word.////////////////////
     private void cover(int index){
         covered.set(index,true);
     }
-
+    ////////////////////Notification of winnings.////////////////////
     private void win(){
         System.out.println(
                         "\n—------------------------------------------------------------------\n"+
@@ -24,17 +25,18 @@ public class Easy {
                         "—------------------------------------------------------------------\n"+
                         "—------------------------------------------------------------------");
     }
-    private void lose(){
+    ////////////////////Notification of loss.////////////////////
+    private void lost(){
         System.out.println(
                         "\n—------------------------------------------------------------------\n"+
                         "—------------------------------------------------------------------\n"+
                         "—------------------------------------------------------------------\n"+
-                        "—---------------------------You Lose:(-----------------------------\n"+
+                        "—---------------------------You Lost:(-----------------------------\n"+
                         "—------------------------------------------------------------------\n"+
                         "—------------------------------------------------------------------\n"+
                         "—------------------------------------------------------------------\n");
     }
-
+    ////////////////////Is the word closed.////////////////////
     private boolean is_covered(){
         List<Boolean> temp = Arrays.asList(false,false,false,false,false,false,false,false);
         if (covered.equals(temp)) {
@@ -44,6 +46,7 @@ public class Easy {
         }
     }
 
+    ////////////////////Redirect to item to open.////////////////////
     private String user_uncovers(){
 
         String result = "";
@@ -138,6 +141,7 @@ public class Easy {
 
         }
     }
+    ////////////////////Redirect to element to close.////////////////////
     private void user_covers(String input){
         switch (input){
             case "A1":
@@ -174,6 +178,7 @@ public class Easy {
                 break;
         }
     }
+    ////////////////////Returns the element by the given cell.////////////////////
     private String outputFrom(String input, List<String> list){
         String temp = new String();
         switch (input){
@@ -212,7 +217,7 @@ public class Easy {
         }
         return temp;
     }
-
+    ////////////////////Displaying the game interface.////////////////////
     private void play_view(List<String> list){
         System.out.println("\n—------------------------------------------------------------------");
         System.out.println("\t\t\t\t\tLevel: easy\n\t\t\t\t\tGuess chances:"+ guess_chances);
@@ -235,7 +240,7 @@ public class Easy {
         }
         System.out.println("—------------------------------------------------------------------");
     }
-
+    ////////////////////Game algorithm.////////////////////
     private void gameplay(List<String> list){
 
         play_view(list);
@@ -272,6 +277,7 @@ public class Easy {
         long start = System.currentTimeMillis();
 
 
+        ////////////////////Game logic////////////////////
         while(flag) {
             if( guess_chances > 0 && is_covered()) {
                 gameplay(memory_game);
@@ -279,24 +285,27 @@ public class Easy {
             }else if(guess_chances>=0 && !is_covered()){
                 flag=false;
                 long end = System.currentTimeMillis();
-                double guessing_time = (double)(end - start)/1000;
+                double guessing_time = (end - start)/1000;
                 win();
                 System.out.println("You solved the memory game after " +(10-guess_chances) + " chances. It took you " + guessing_time + "seconds");
-
+                ////////////////////Recording the result.////////////////////
                 Result result = new Result(guessing_time,(10-guess_chances));
                 BestResult bestResult = new BestResult(result.name,result.guessing_date,result.guessing_time,result.guessing_tries,"Easy");
                 System.out.println("Top 10 result: ");
+                ////////////////////Display data.////////////////////
                 bestResult.show();
 
             }else {
                 flag=false;
-                lose();
+                lost();
                 BestResult bestResult= new BestResult();
                 System.out.println("Top 10 result: ");
+                ////////////////////Display data.////////////////////
                 bestResult.show();
             }
         }
 
         System.out.println();
     }
+
 }

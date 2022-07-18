@@ -3,21 +3,22 @@ package Motorola;
 import java.util.*;
 
 public class Hard{
-
+    ////////////////////Number of chances.////////////////////
     private int guess_chances = 15;
     private List<Boolean> covered = Arrays.asList(true,true,true,true,
             true,true,true,true,
             true,true,true,true,
             true,true,true,true);
-
+    ////////////////////Close the word.////////////////////
     private void cover(int index){
         covered.set(index,true);
     }
+    ////////////////////Open the word.////////////////////
     private void uncover(int index){
         covered.set(index,false);
 
     }
-
+    ////////////////////Notification of winnings.////////////////////
     private void win(){
         System.out.println(
                 "\n—------------------------------------------------------------------\n"+
@@ -28,17 +29,18 @@ public class Hard{
                         "—------------------------------------------------------------------\n"+
                         "—------------------------------------------------------------------");
     }
-    private void lose(){
+    ////////////////////Notification of loss.////////////////////
+    private void lost(){
         System.out.println(
                 "\n—------------------------------------------------------------------\n"+
                         "—------------------------------------------------------------------\n"+
                         "—------------------------------------------------------------------\n"+
-                        "—---------------------------You Lose:(-----------------------------\n"+
+                        "—---------------------------You Lost:(-----------------------------\n"+
                         "—------------------------------------------------------------------\n"+
                         "—------------------------------------------------------------------\n"+
                         "—------------------------------------------------------------------\n");
     }
-
+    ////////////////////Is the word closed.////////////////////
     private boolean is_covered(){
         List<Boolean> temp = Arrays.asList(false,false,false,false,
                 false,false,false,false,
@@ -50,7 +52,7 @@ public class Hard{
             return true;
         }
     }
-
+    ////////////////////Redirect to item to open.////////////////////
     private String user_uncovers(){
 
         String result = "";
@@ -225,6 +227,7 @@ public class Hard{
 
         }
     }
+    ////////////////////Redirect to element to close.////////////////////
     private void user_covers(String input){
         switch (input){
             case "A1":
@@ -293,6 +296,7 @@ public class Hard{
                 break;
         }
     }
+    ////////////////////Returns the element by the given cell.////////////////////
     private String outputFrom(String input, List<String> list){
         String temp = new String();
         switch (input){
@@ -363,7 +367,7 @@ public class Hard{
         }
         return temp;
     }
-
+    ////////////////////Displaying the game interface.////////////////////
     private void play_view(List<String> list){
         System.out.println("\n—------------------------------------------------------------------");
         System.out.println("\t\t\t\t\tLevel: hard\n\t\t\t\t\tGuess chances:"+ guess_chances);
@@ -390,7 +394,7 @@ public class Hard{
         }
         System.out.println("—------------------------------------------------------------------");
     }
-
+    ////////////////////Game algorithm.////////////////////
     private void gameplay(List<String> list){
 
         play_view(list);
@@ -413,7 +417,7 @@ public class Hard{
         }
 
     }
-
+    ////////////////////Game logic////////////////////
     Hard(List<String> list) throws Exception {
         List<String> memory_game = new ArrayList<>();
         memory_game.addAll(list);
@@ -432,20 +436,22 @@ public class Hard{
             }else if(guess_chances>=0 && !is_covered()){
                 flag=false;
                 long end = System.currentTimeMillis();
-                double guessing_time = (double)(end - start)/1000;
+                double guessing_time = (end - start)/1000;
                 win();
                 System.out.println("You solved the memory game after " +(10-guess_chances) + " chances. It took you " + guessing_time + "seconds");
 
                 Result result = new Result(guessing_time,(10-guess_chances));
                 BestResult bestResult = new BestResult(result.name,result.guessing_date,result.guessing_time,result.guessing_tries,"Easy");
                 System.out.println("Top 10 result: ");
+                ////////////////////Display data.////////////////////
                 bestResult.show();
 
             }else {
                 flag=false;
-                lose();
+                lost();
                 BestResult bestResult= new BestResult();
                 System.out.println("Top 10 result: ");
+                ////////////////////Display data.////////////////////
                 bestResult.show();
             }
         }

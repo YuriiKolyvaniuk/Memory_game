@@ -1,48 +1,62 @@
 package Motorola;
 
 import java.io.*;
-import java.util.Date;
-import java.util.List;
-import java.util.Random;
-import java.util.Scanner;
+import java.util.*;
 
 public class BestResult{
+    ////////////////////Path to file.////////////////////
     File file = new File("BestResult.txt");
-
+    ////////////////////Number of items to display.////////////////////
     private int numsFor_top = 10;
 
+    ////////////////////Just arrays for data.////////////////////
     String[] names = new String[numsFor_top];
     String[] dates = new String[numsFor_top];
     double[] times = new double[numsFor_top];
     int[] tries = new int[numsFor_top];
     String[] modes = new String[numsFor_top];
 
-
+    ////////////////////Checking if the file is empty.////////////////////
     private boolean isFileEmpty(File input){
         return input.length() == 0;
     }
+    ////////////////////Checking if the file exists.////////////////////
     private void start() throws Exception{
         if(file.exists()){
             file.createNewFile();
         }
     }
+    ////////////////////Adding new data.////////////////////
     private void addResult(String name, String date, double guessing_time, int guessing_tries, String mode) throws IOException {
-        FileWriter fileWriter = new FileWriter(file);
+        FileWriter fileWriter = new FileWriter(file,true);
         BufferedWriter bufferedWriter = new BufferedWriter(fileWriter);
-        bufferedWriter.write(name + "|" + date + "|" + guessing_time + "|" + guessing_tries + "|"+ mode + "|");
+        bufferedWriter.write(name + " | " + date + " | " + guessing_time + " | " + guessing_tries + " | "+ mode + " | ");
         bufferedWriter.newLine();
         bufferedWriter.flush();
         bufferedWriter.close();
     }
+    ////////////////////Deleting data and writing new ones.////////////////////
     private void updateData() throws IOException {
-        new FileWriter(file, false).close();
+        new FileWriter(file,false).close();
         for(int i =0;i < numsFor_top;i++){
             addResult(names[i],dates[i],times[i],tries[i],modes[i]);
         }
     }
+    ////////////////////Reading data.////////////////////
     private void readTop() throws Exception {
         Scanner scanner = new Scanner(file);
-        scanner.useDelimiter("[|]");
+        scanner.useDelimiter("\\|");
+        scanner.useLocale(Locale.US);
+        int i = 0;
+        while(scanner.hasNext()){
+            names[i] = scanner.next();
+            dates[i] = scanner.next();
+            times[i] = scanner.nextDouble();
+            tries[i] = scanner.nextInt();
+            modes[i] = scanner.next();
+            i++;
+        }
+        /*
         for(int i = 0; i < numsFor_top;i++){
             names[i] = scanner.next();
             dates[i] = scanner.next();
@@ -50,11 +64,13 @@ public class BestResult{
             tries[i] = scanner.nextInt();
             modes[i] = scanner.next();
         }
+        */
     }
+
     private boolean comparison(double guessing_time){
         return guessing_time < tries[numsFor_top-1];
     }
-
+    ////////////////////Sorting algorithm.////////////////////
     private void sort(){
         sort(0,tries.length-1);
     }
@@ -93,6 +109,7 @@ public class BestResult{
         return leftPointer;
     }
 
+    ////////////////////Changing the display sequence.////////////////////
     private void swap( int index1, int index2){
         int tempTry = tries[index1];
         tries[index1] = tries[index2];
@@ -116,10 +133,10 @@ public class BestResult{
 
     }
 
-
+    ////////////////////Display data.////////////////////
     public void show() {
-        System.out.printf("%-10s%-15s%-15s%-15s%-15s", "#", "Name", "Date", "Guessing Time", "Guessing Tries");
-        for (int i = 0; i < numsFor_top; i++) {
+        System.out.printf("%-5s%-10s%-10s%-10s%-10s%-10%s", "#", "Name", "Date", "Guessing Time", "Guessing Tries","Mode");
+        for (int i = numsFor_top-1; i >= 0; i++) {
             if (dates[i] != null) {
                 System.out.printf("%-10d", i + 1);
                 System.out.println(". ");
@@ -128,7 +145,7 @@ public class BestResult{
         }
     }
 
-    BestResult(String name, String date, double guessing_time, int guessing_tries,String mode) throws Exception{
+    BestResult(String name, String date, double guessing_time, int guessing_tries, String mode) throws Exception{
         start();
         if(isFileEmpty(file)){
             addResult(name,date,guessing_time,guessing_tries,mode);
