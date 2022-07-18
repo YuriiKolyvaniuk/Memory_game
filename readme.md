@@ -12,8 +12,8 @@ For *Motorola* project.</br>
 - At the end of the game, we record the data and display the Top 10 players.</br>
 
 ---
->###Class **Result**</br>
->- In this class, we record the current result and request the user's nickname.</br>
+###Class **Result**</br>
+- In this class, we record the current result and request the user's nickname.</br>
 
 ---
 ###Class **BestResult**</br>
