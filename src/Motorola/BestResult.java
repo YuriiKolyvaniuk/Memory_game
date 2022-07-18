@@ -45,8 +45,9 @@ public class BestResult{
     ////////////////////Reading data.////////////////////
     private void readTop() throws Exception {
         Scanner scanner = new Scanner(file);
-        scanner.useDelimiter("\\|");
+        scanner.useDelimiter(" \\| ");
         scanner.useLocale(Locale.US);
+
         int i = 0;
         while(scanner.hasNext()){
             names[i] = scanner.next();
@@ -54,8 +55,11 @@ public class BestResult{
             times[i] = scanner.nextDouble();
             tries[i] = scanner.nextInt();
             modes[i] = scanner.next();
+
             i++;
         }
+
+
     }
 
     private boolean comparison(double guessing_time){
