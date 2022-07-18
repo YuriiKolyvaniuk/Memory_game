@@ -56,15 +56,6 @@ public class BestResult{
             modes[i] = scanner.next();
             i++;
         }
-        /*
-        for(int i = 0; i < numsFor_top;i++){
-            names[i] = scanner.next();
-            dates[i] = scanner.next();
-            times[i] = scanner.nextDouble();
-            tries[i] = scanner.nextInt();
-            modes[i] = scanner.next();
-        }
-        */
     }
 
     private boolean comparison(double guessing_time){
