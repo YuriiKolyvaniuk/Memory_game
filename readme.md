@@ -427,13 +427,8 @@
 
 [//]: # ()
 [//]: # (</style>)
-<h1>
-<span></span>
-<span></span>
-<span></span>
-<span></span>
-Memory Game 
-</h1>
+
+# Memory Game
 
 ## Class Main
 - In the main class, the selection of the action, the difficulty of the game and the selection of random words in relation to the severity are implemented.
@@ -448,18 +443,10 @@ Memory Game
 - In this class, we record a player's current result in the **Top 10 players**, provided that the result is at least greater than the last result in this list.
 - We display the Top10 in `show()` method.
 - We sort the list of elements using **[QuickSort](https://en.wikipedia.org/wiki/Quicksort "Wikipedia about Quick Sort")**  .</br>
-<h3>
-<span></span>
-<span></span>
-<span></span>
-<span></span>
-Class Result
+
+### Class Result
 - In this class, we record the current result, mode and request the user's nickname.
-</h3>
+
 <a href="https://github.com/YuriiKolyvaniuk" class="git">
-<span></span>
-<span></span>
-<span></span>
-<span></span>
 by Yurii Kolyvaniuk
 </a>
