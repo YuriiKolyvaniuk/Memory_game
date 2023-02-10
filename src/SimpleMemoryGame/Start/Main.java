@@ -61,7 +61,7 @@ public class Main {
             } else if (action.equals("2")) {
                 break;
             } else {
-                System.out.println("ERROR\t...Incorrect vault!");
+                System.out.println("ERROR\t...Incorrect action!");
             }
         }
     }
