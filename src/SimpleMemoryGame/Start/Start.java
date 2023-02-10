@@ -11,9 +11,9 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
-;
 
-public class Main {
+
+public class Start {
 
     private static void randElFromList(List<String> list, int number, List<String> main_list) {
         Random rand = new Random();
@@ -25,13 +25,7 @@ public class Main {
         }
     }
 
-
-
-
-    public static void main(String[] args) throws Exception {
-        final List<String> str_list = new ArrayList<>();
-        File file = new File("Words.txt");
-
+    private static void starting(File file, List<String> str_list) throws Exception {
         FileReader fileReader = new FileReader(file);
         BufferedReader bufferedReader = new BufferedReader(fileReader);
         while (bufferedReader.ready()){
@@ -64,5 +58,20 @@ public class Main {
                 System.out.println("ERROR\t...Incorrect action!");
             }
         }
+    }
+
+
+
+
+    public static void main(String[] args) {
+        final List<String> str_list = new ArrayList<>();
+        File file = new File("Words.txt");
+
+        try {
+            starting(file,str_list);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+
     }
 }
